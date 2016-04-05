@@ -353,7 +353,7 @@ Now, let's say that a new tweet comes in and the extracted information is
 ```
 hashtags = [Cassandra, NoSQL], created_at: Thu Mar 24 17:51:10 +0000 2016
 ```
-This tweet is out of order and is outside the 60 second window of the maximum timestamp processed (latest timestamp),  i.e., `Thu Mar 24 17:52:12 +0000 2016`. This tweet should be ignored. It will not form new edges and will not contribute to the graph formation. The graph remains the same as before this tweet arrived.
+This tweet is out of order and is outside the 60 second window of the maximum timestamp processed (latest timestamp),  i.e., `Thu Mar 24 17:52:12 +0000 2016`. This tweet should be ignored. It will not form new edges and will not contribute to the graph formation. The graph remains the same as before this tweet arrived, so the average remains `2.00`.
 
 Consider that a new tweet arrives and the extracted information is
 
@@ -403,6 +403,7 @@ The rolling average degree output is
 2.00
 2.00
 1.66
+2.00
 2.00
 1.66
 ```
