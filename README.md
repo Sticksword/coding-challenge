@@ -6,6 +6,9 @@ Insight Data Engineering - Coding Challenge
 * `cd` to directory containing run.sh
 * execute `./run.sh` (if permissions error, first execute `chmod +x run.sh` and then do `./run.sh`)
 * output is in the `tweets_output` directory
+### To test using `insight_testsuite` directory tests
+* `cd` to `insight_testsuite` directory (containing run_tests.sh)
+* execute `./run_tests.sh` (if permissions error, first execute `chmod +x run_tests.sh` and then do `./run_tests.sh`)
 
 ===========================================================
 
