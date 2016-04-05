@@ -1,6 +1,14 @@
 Insight Data Engineering - Coding Challenge
 ===========================================================
 
+## Implementation by Michael Chen
+### To create output for checking:
+* `cd` to directory containing run.sh
+* execute `./run.sh` (if permissions error, first execute `chmod +x run.sh` and then do `./run.sh`)
+* output is in the `tweets_output` directory
+
+===========================================================
+
 # Table of Contents
 1. [Challenge Summary](README.md#challenge-summary)
 2. [Details of Implementation](README.md#details-of-implementation)
