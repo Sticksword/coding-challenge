@@ -24,17 +24,14 @@ class Tweet:
   def __init__(self, text):
     tweet_dict = json.loads(text)
 
-    # print tweet_dict['created_at']
     date = str(tweet_dict['created_at']).split(' ')
     # eg. Tue Mar 29 06:04:50 +0000 2016
-    # Under assumption that it is always +0000 timezone
+    # *** Important: Under assumption that it is always +0000 timezone ***
     time = date[3].split(':')
     self.timestamp = datetime(int(date[5]), months[date[1]], int(date[2]), int(time[0]), int(time[1]), int(time[2]))
     self.hashtags = []
-    # print tweet_dict['entities']['hashtags']
     for data in tweet_dict['entities']['hashtags']:
       self.hashtags.append(data['text'].lstrip('#'))
-    # print self.hashtags
 
   def get_timestamp(self):
     return self.timestamp
@@ -80,7 +77,7 @@ class Graph:
     if number_of_nodes == 0:
       return '%.2f' % 0.0
     else:
-      # return float(degree_sum) / number_of_nodes
+      # return float(degree_sum) / number_of_nodes # ok this doesn't work because of rounding issues
       # format into 3 places, then chop off that extra digit
       values = str('%.3f' % (float(degree_sum) / number_of_nodes)).split('.')
       return values[0] + '.' + values[1][:2]
@@ -96,7 +93,6 @@ if __name__ == "__main__":
     graph.link_hashtags(tweet)
     output_file.write('{}\n'.format(graph.average_degree()))
 
-    # tweet_count = 0
     for line_number, content in enumerate(input_file):
       try:
         tweet = Tweet(content)
@@ -104,14 +100,11 @@ if __name__ == "__main__":
         # print e # throw out all 'limit' json objects (not tweets)
         continue
 
-      # tweet_count += 1
-      # print 'earliest time = ' + str(earliest_time) + ' vs. ' + str(tweet.get_timestamp())
       if tweet.get_timestamp() > latest_time:
         latest_time = tweet.get_timestamp()
         earliest_time = latest_time - timedelta(0, 60)
       
       if tweet.get_timestamp() <= earliest_time:
-        print 'SKIPPING'
         output_file.write('{}\n'.format(graph.average_degree()))
         continue
 
@@ -122,7 +115,5 @@ if __name__ == "__main__":
         (time, old_tweet) = heapq.heappop(window)
         graph.unlink_hashtags(old_tweet)
       output_file.write('{}\n'.format(graph.average_degree()))
-
-    # print tweet_count
 
 
